@@ -69,12 +69,12 @@ INSERT INTO Payment (Order_id, Amount, Payment_dt) VALUES
     (3, 319.99, '2024-05-03 10:35:00');
 
 
-us------
+----us------
 CREATE DATABASE us_region;
 \c us_region;
 
 
--- Replicated tables
+-- Replicated tables US
 CREATE TABLE Customer (
     Cust_id SERIAL PRIMARY KEY,
     Name VARCHAR(100),
@@ -82,10 +82,6 @@ CREATE TABLE Customer (
     Country VARCHAR(50),
     Phn_no VARCHAR(20)
 );
-
-
---------
-
 
 -- Region-specific tables
 CREATE TABLE "Order" (
@@ -109,7 +105,7 @@ CREATE TABLE Product (
     Seller_id INTEGER,
     StockLevel INTEGER
 );
--- Insert sample data for Asia region
+-- Insert sample data for USA region
 INSERT INTO Customer (Name, Email, Country, Phn_no) VALUES
     ('Saikat Banik', 'saikat@gmail.com', 'India', '+91-555-0101'),
     ('Hidetoshi Yuki', 'hidetoshi@gmail.com', 'Japan', '+81-555-0102'),
@@ -122,7 +118,7 @@ INSERT INTO Customer (Name, Email, Country, Phn_no) VALUES
     ('Michael Brown', 'michael@gmail.com', 'USA', '+1-555-0103');
 
 ----Fragmentation---
-CREATE TABLE Customer_USA AS
+CREATE TABLE Customer_US AS
 SELECT * FROM Customer
 WHERE Country = 'USA';
 
@@ -139,9 +135,9 @@ INSERT INTO Product (ProductName, Price, Description, Seller_id, StockLevel) VAL
 
 
 INSERT INTO "Order" (Cust_id, Order_dt, Status) VALUES
-    (1, '2024-05-01 10:30:00', 'Pending'),
-    (2, '2024-05-02 14:45:00', 'Shipped'),
-    (3, '2024-05-03 08:15:00', 'Delivered');
+    (7, '2024-05-01 10:30:00', 'Pending'),
+    (8, '2024-05-02 14:45:00', 'Shipped'),
+    (9, '2024-05-03 08:15:00', 'Delivered');
 
 INSERT INTO Payment (Order_id, Amount, Payment_dt) VALUES
     (1, 999.99, '2024-05-01 10:35:00'),
@@ -152,7 +148,7 @@ INSERT INTO Payment (Order_id, Amount, Payment_dt) VALUES
 CREATE DATABASE eu_region;
 \c eu_region;
 
--- Repsaikatcated tables
+-- Replicated tables EU
 CREATE TABLE Customer (
     Cust_id SERIAL PRIMARY KEY,
     Name VARCHAR(100),
@@ -186,9 +182,15 @@ CREATE TABLE Product (
 );
 -- Insert sample data for EU region
 INSERT INTO Customer (Name, Email, Country, Phn_no) VALUES
+    ('Saikat Banik', 'saikat@gmail.com', 'India', '+91-555-0101'),
+    ('Hidetoshi Yuki', 'hidetoshi@gmail.com', 'Japan', '+81-555-0102'),
+    ('Iqbal Hossen', 'iqbal@gmail.com', 'Bangladesh', '+88-555-0103'),
     ('Dominik Saimon', 'dominik@gmail.com', 'Germany', '+49-555-0101'),
     ('Marie Dubois', 'marie@gmail.com', 'France', '+33-555-0102'),
-    ('Giuseppe Romano', 'giuseppe@gmail.com', 'Italy', '+39-555-0103');
+    ('Giuseppe Romano', 'giuseppe@gmail.com', 'Italy', '+39-555-0103'),
+    ('John Smith', 'john@gmail.com', 'USA', '+1-555-0101'),
+    ('Dakota Johnson', 'Dakota@gmail.com', 'USA', '+1-555-0102'),
+    ('Michael Brown', 'michael@gmail.com', 'USA', '+1-555-0103');
 ---Fragmentation-----
 CREATE TABLE customer_eu AS
 SELECT * FROM Customer
@@ -200,9 +202,9 @@ INSERT INTO Product (ProductName, Price, Description, Seller_id, StockLevel) VAL
     ('Tablet', 349.99, 'Lightweight tablet device', 3, 60);
 
 INSERT INTO "Order" (Cust_id, Order_dt, Status) VALUES
-    (1, '2024-05-01 11:45:00', 'Pending'),
-    (2, '2024-05-02 15:30:00', 'Shipped'),
-    (3, '2024-05-03 09:00:00', 'Delivered');
+    (4, '2024-05-01 11:45:00', 'Pending'),
+    (5, '2024-05-02 15:30:00', 'Shipped'),
+    (6, '2024-05-03 09:00:00', 'Delivered');
 
 INSERT INTO Payment (Order_id, Amount, Payment_dt) VALUES
     (1, 899.99, '2024-05-01 11:50:00'),
